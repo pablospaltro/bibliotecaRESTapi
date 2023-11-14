@@ -23,8 +23,19 @@ public class LibroService {
         return libroRepository.findById(id);
     }
 
-    public void guardarLibro(Libro prod) {
-        libroRepository.save(prod);
+    public Libro guardarLibro(Libro libroNuevo) {
+        return libroRepository.save(libroNuevo);
+    }
+
+    public Libro actualizarLibro(Libro libroActualizado, Integer id){
+        Libro libroAActualizar = libroRepository.findById(id).get();
+        libroAActualizar.setTitulo(libroActualizado.getTitulo());
+        libroAActualizar.setAutor(libroActualizado.getAutor());
+        libroAActualizar.setEditorial(libroActualizado.getEditorial());
+        libroAActualizar.setISBN(libroActualizado.getISBN());
+        libroAActualizar.setAnioPublicacion(libroActualizado.getAnioPublicacion());
+        libroAActualizar.setEstaDisponible(libroActualizado.isEstaDisponible());
+        return libroRepository.save(libroActualizado);
     }
 
     public void eliminarLibro(int id) {

@@ -27,4 +27,8 @@ public class Libro {
     private int anioPublicacion;
 
     private String ISBN;
+
+    private boolean estaDisponible;
+
+
 }
