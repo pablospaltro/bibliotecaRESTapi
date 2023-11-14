@@ -1,8 +1,8 @@
 package com.example.bibliotecarestapi.controllers;
 
 import com.example.bibliotecarestapi.entities.Libro;
-import com.example.bibliotecarestapi.entities.ModelResponseList;
-import com.example.bibliotecarestapi.entities.ModelResponseObject;
+import com.example.bibliotecarestapi.modelResponses.LibroModelResponse;
+import com.example.bibliotecarestapi.modelResponses.LibrosListaModelResponse;
 import com.example.bibliotecarestapi.services.LibroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,59 +19,59 @@ public class BiblioController {
     LibroService libroService;
 
     @GetMapping("/libro/vertodos")
-    public ResponseEntity<ModelResponseList> VerTodosLibros() {
+    public ResponseEntity<LibrosListaModelResponse> VerTodosLibros() {
         try{
             List<Libro> list = libroService.verLibrosTodos();
-            return ResponseEntity.status(HttpStatus.OK).body(new ModelResponseList("Operación exitosa, mostrando libros", list));
+            return ResponseEntity.status(HttpStatus.OK).body(new LibrosListaModelResponse("Operación exitosa, mostrando libros", "Status: OK", list));
         } catch (Exception e){
             List<Libro> list = null;
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ModelResponseList("No se encontraron libros", list));
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new LibrosListaModelResponse("No se encontraron libros", "Status: NOT_FOUND", list));
         }
     }
 
     @GetMapping("/libro/ver/{id}")
-    public ResponseEntity<ModelResponseObject> verLibroPorId(@PathVariable("id") int id) {
+    public ResponseEntity<LibroModelResponse> verLibroPorId(@PathVariable("id") int id) {
         try{
             Libro libro = libroService.verLibrosPorID(id).get();
-            return ResponseEntity.status(HttpStatus.OK).body(new ModelResponseObject("Operación exitosa, mostrando libro.", libro));
+            return ResponseEntity.status(HttpStatus.OK).body(new LibroModelResponse("Operación exitosa, mostrando libro.", "Status: OK", libro));
         } catch (Exception e){
             Libro libro = null;
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ModelResponseObject("No se encontró el libro.", libro));
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new LibroModelResponse("No se encontró el libro.", "Status: NOT_FOUND", libro));
         }
     }
 
 
     @PostMapping("/libro/guardar")
-    public ResponseEntity<ModelResponseObject> guardarNuevoLibro(@RequestBody Libro libro){
+    public ResponseEntity<LibroModelResponse> guardarNuevoLibro(@RequestBody Libro libro){
         try{
             libroService.guardarLibro(libro);
-            return ResponseEntity.status(HttpStatus.CREATED).body(new ModelResponseObject("Operación exitosa, libro guardado.", libro));
+            return ResponseEntity.status(HttpStatus.CREATED).body(new LibroModelResponse("Operación exitosa, libro guardado.", "Status: CREATED", libro));
         } catch (Exception e){
             libro = null;
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ModelResponseObject("Datos incorrectos.", libro));
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new LibroModelResponse("Datos incorrectos.", "Status: BAD_REQUEST", libro));
         }
     }
 
     @PutMapping("/libro/actualizar/id/{id}")
-    public ResponseEntity<ModelResponseObject> actualizarLibro(@PathVariable("id") Integer id, @RequestBody Libro libroActualizado){
+    public ResponseEntity<LibroModelResponse> actualizarLibro(@PathVariable("id") Integer id, @RequestBody Libro libroActualizado){
         try{
             libroService.actualizarLibro(libroActualizado, id);
-            return ResponseEntity.status(HttpStatus.CREATED).body(new ModelResponseObject("Operación exitosa, libro actualizado.", libroActualizado));
+            return ResponseEntity.status(HttpStatus.CREATED).body(new LibroModelResponse("Operación exitosa, libro actualizado.", "Status: CREATED", libroActualizado));
         } catch (Exception e){
             libroActualizado = null;
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ModelResponseObject("No se encontró el libro.", libroActualizado));
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new LibroModelResponse("No se encontró el libro.", "Status: NOT_FOUND", libroActualizado));
         }
     }
 
     @DeleteMapping("/libro/eliminar/id/{id}")
-    public ResponseEntity<ModelResponseObject> eliminarLibro(@PathVariable("id") Integer id){
+    public ResponseEntity<LibroModelResponse> eliminarLibro(@PathVariable("id") Integer id){
         Libro libro = libroService.verLibrosPorID(id).get();
         try{
             libroService.eliminarLibro(id);
-            return ResponseEntity.status(HttpStatus.OK).body(new ModelResponseObject("Operación exitosa, libro eliminado.", libro));
+            return ResponseEntity.status(HttpStatus.OK).body(new LibroModelResponse("Operación exitosa, libro eliminado.", "Status: OK", libro));
         } catch (Exception e){
 
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ModelResponseObject("No se encontró el libro.", libro));
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new LibroModelResponse("No se encontró el libro.", "Status: NOT_FOUND", libro));
         }
     }
 }
