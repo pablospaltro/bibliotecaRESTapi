@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface LectorRepository extends JpaRepository<Lector, Integer> {
+
+    public abstract Lector findByNombre(String nombre);
 }
