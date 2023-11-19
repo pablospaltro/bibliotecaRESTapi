@@ -32,7 +32,7 @@ public class LibroService {
         libroAActualizar.setTitulo(libroActualizado.getTitulo());
         libroAActualizar.setAutor(libroActualizado.getAutor());
         libroAActualizar.setEditorial(libroActualizado.getEditorial());
-        libroAActualizar.setISBN(libroActualizado.getISBN());
+        libroAActualizar.setIsbn(libroActualizado.getIsbn());
         libroAActualizar.setAnioPublicacion(libroActualizado.getAnioPublicacion());
         libroAActualizar.setEstaDisponible(libroActualizado.isEstaDisponible());
         return libroRepository.save(libroActualizado);

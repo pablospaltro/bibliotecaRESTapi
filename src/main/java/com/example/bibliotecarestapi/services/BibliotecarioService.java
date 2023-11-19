@@ -2,6 +2,7 @@ package com.example.bibliotecarestapi.services;
 
 import com.example.bibliotecarestapi.entities.Bibliotecario;
 import com.example.bibliotecarestapi.repositories.IBibliotecarioRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,6 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional
 public class BibliotecarioService {
 
     @Autowired
@@ -26,19 +28,19 @@ public class BibliotecarioService {
         return bibliotecarioRepository.save(nuevoBibliotecario);
     }
 
-    public Bibliotecario actualizarBiliotecario(Bibliotecario bibliotecarioActualizado, Integer id){
-
+    public Bibliotecario actualizarBibliotecario(Bibliotecario bibliotecarioActualizado, Integer id){
         Bibliotecario bibliotecarioAActualizar = bibliotecarioRepository.findById(id).get();
 
         bibliotecarioAActualizar.setNombreCompleto(bibliotecarioActualizado.getNombreCompleto());
         bibliotecarioAActualizar.setEmail(bibliotecarioActualizado.getEmail());
-        bibliotecarioAActualizar.setDNI(bibliotecarioActualizado.getDNI());
+        bibliotecarioAActualizar.setDni(bibliotecarioActualizado.getDni());
         bibliotecarioAActualizar.setNickname(bibliotecarioActualizado.getNickname());
         bibliotecarioAActualizar.setPassword(bibliotecarioActualizado.getPassword());
         bibliotecarioAActualizar.setTurno(bibliotecarioActualizado.getTurno());
 
-        return bibliotecarioRepository.save(bibliotecarioActualizado);
+        return bibliotecarioRepository.save(bibliotecarioAActualizar);
     }
+
 
     public void eliminarBiliotecario(int id) {
         bibliotecarioRepository.deleteById(id);

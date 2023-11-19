@@ -33,7 +33,7 @@ public class LectorService {
 
         lectorAActualizar.setNombreCompleto(lectorActualizado.getNombreCompleto());
         lectorAActualizar.setEmail(lectorActualizado.getEmail());
-        lectorAActualizar.setDNI(lectorActualizado.getDNI());
+        lectorAActualizar.setDni(lectorActualizado.getDni());
         lectorAActualizar.setNickname(lectorActualizado.getNickname());
         lectorAActualizar.setPassword(lectorActualizado.getPassword());
         lectorAActualizar.setLibrosPrestados(lectorActualizado.getLibrosPrestados());
