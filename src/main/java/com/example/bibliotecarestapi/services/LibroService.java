@@ -1,8 +1,7 @@
 package com.example.bibliotecarestapi.services;
 
-import com.example.bibliotecarestapi.entities.Autor;
 import com.example.bibliotecarestapi.entities.Libro;
-import com.example.bibliotecarestapi.repositories.ILibroRepository;
+import com.example.bibliotecarestapi.repositories.LibroRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +12,7 @@ import java.util.Optional;
 public class LibroService {
 
     @Autowired
-    ILibroRepository libroRepository;
+    LibroRepository libroRepository;
 
     public List<Libro> verLibrosTodos() {
         return libroRepository.findAll();

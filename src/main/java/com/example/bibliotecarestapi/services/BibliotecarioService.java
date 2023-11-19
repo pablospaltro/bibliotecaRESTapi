@@ -1,7 +1,7 @@
 package com.example.bibliotecarestapi.services;
 
 import com.example.bibliotecarestapi.entities.Bibliotecario;
-import com.example.bibliotecarestapi.repositories.IBibliotecarioRepository;
+import com.example.bibliotecarestapi.repositories.BibliotecarioRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,7 +14,7 @@ import java.util.Optional;
 public class BibliotecarioService {
 
     @Autowired
-    IBibliotecarioRepository bibliotecarioRepository;
+    BibliotecarioRepository bibliotecarioRepository;
 
     public List<Bibliotecario> verBibliotecariosTodos() {
         return bibliotecarioRepository.findAll();

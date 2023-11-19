@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface IBibliotecarioRepository extends JpaRepository<Bibliotecario, Integer> {
+public interface BibliotecarioRepository extends JpaRepository<Bibliotecario, Integer> {
 }
