@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ResponseHandler {
+public class ResponseHandlerObject {
 
     public static ResponseEntity<Object> responseBuilder(String messsage, HttpStatus httpStatus, Object responseObject){
         Map<String, Object> response = new HashMap<>();

@@ -2,11 +2,10 @@ package com.example.bibliotecarestapi.controllers;
 
 import com.example.bibliotecarestapi.entities.Bibliotecario;
 import com.example.bibliotecarestapi.entities.Lector;
-import com.example.bibliotecarestapi.modelResponses.BibliotecarioListaModelResponse;
 import com.example.bibliotecarestapi.modelResponses.BibliotecarioModelResponse;
 import com.example.bibliotecarestapi.modelResponses.LectorListaModelResponse;
 import com.example.bibliotecarestapi.modelResponses.LectorModelResponse;
-import com.example.bibliotecarestapi.response.ResponseHandler;
+import com.example.bibliotecarestapi.response.ResponseHandlerObject;
 import com.example.bibliotecarestapi.services.BibliotecarioService;
 import com.example.bibliotecarestapi.services.LectorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,19 +26,13 @@ public class RegistroController {
     LectorService lectorService;
 
     @GetMapping("/bibliotecario/vertodos")
-    public ResponseEntity<BibliotecarioListaModelResponse> VerTodosBibliotecario() {
-        try{
-            List<Bibliotecario> list = bibliotecarioService.verBibliotecariosTodos();
-            return ResponseEntity.status(HttpStatus.OK).body(new BibliotecarioListaModelResponse("Operación exitosa, mostrando bibliotecarios.", "Status: OK", list));
-        } catch (Exception e){
-            List<Bibliotecario> list = null;
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new BibliotecarioListaModelResponse("No se encontraron bibliotecarios", "Status: NOT_FOUND", list));
-        }
+    public List<Bibliotecario> VerTodosBibliotecario() {
+        return bibliotecarioService.verBibliotecariosTodos();
     }
 
     @GetMapping("/bibliotecario/ver/{id}")
     public ResponseEntity<Object> verBibliotecarioPorId(@PathVariable("id") int id) {
-        return ResponseHandler.responseBuilder("Aqui estan los datos del bibliotecario solicitado.", HttpStatus.OK, bibliotecarioService.verBibliotecarioPorID(id));
+        return ResponseHandlerObject.responseBuilder("Aqui estan los datos del bibliotecario solicitado.", HttpStatus.OK, bibliotecarioService.verBibliotecarioPorID(id));
     }
 
 
@@ -91,14 +84,8 @@ public class RegistroController {
     }
 
     @GetMapping("/lector/ver/{id}")
-    public ResponseEntity<LectorModelResponse> verLectorPorId(@PathVariable("id") int id) {
-        try{
-            Lector lector = lectorService.verLectorPorID(id).get();
-            return ResponseEntity.status(HttpStatus.OK).body(new LectorModelResponse("Operación exitosa, mostrando lector.", "Status: OK", lector));
-        } catch (Exception e){
-            Lector lector = null;
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new LectorModelResponse("No se encontró el lector.", "Status: NOT_FOUND", lector));
-        }
+    public ResponseEntity<Object> verLectorPorId(@PathVariable("id") int id) {
+        return ResponseHandlerObject.responseBuilder("Aqui estan los datos del bibliotecario solicitado.", HttpStatus.OK, lectorService.verLectorPorID(id));
     }
 
 

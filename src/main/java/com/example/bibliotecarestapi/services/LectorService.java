@@ -1,6 +1,7 @@
 package com.example.bibliotecarestapi.services;
 
 import com.example.bibliotecarestapi.entities.Lector;
+import com.example.bibliotecarestapi.exceptions.UsuarioNotFoundException;
 import com.example.bibliotecarestapi.repositories.LectorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,10 +16,14 @@ public class LectorService {
     LectorRepository lectorRepository;
 
     public List<Lector> verLectoresTodos() {
+        if (lectorRepository.findAll().isEmpty())
+            throw new UsuarioNotFoundException("No hay lectores ingresados.");
         return lectorRepository.findAll();
     }
 
     public Optional<Lector> verLectorPorID(int id) {
+        if (lectorRepository.findById(id).isEmpty())
+            throw new UsuarioNotFoundException("El lector solicitado no existe");
         return lectorRepository.findById(id);
     }
     
