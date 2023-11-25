@@ -1,6 +1,7 @@
 package com.example.bibliotecarestapi.services;
 
 import com.example.bibliotecarestapi.entities.Bibliotecario;
+import com.example.bibliotecarestapi.exceptions.BibliotecarioNotFoundException;
 import com.example.bibliotecarestapi.repositories.BibliotecarioRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,8 @@ public class BibliotecarioService {
     }
 
     public Optional<Bibliotecario> verBibliotecarioPorID(int id) {
+        if (bibliotecarioRepository.findById(id).isEmpty())
+            throw new BibliotecarioNotFoundException("El bibliotecario solicitado no existe");
         return bibliotecarioRepository.findById(id);
     }
 

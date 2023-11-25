@@ -30,7 +30,7 @@ public class BiblioController {
     }
 
     @GetMapping("/libro/ver/{id}")
-    public ResponseEntity<LibroModelResponse> verLibroPorId(@PathVariable("id") int id) {
+    public ResponseEntity<Object> verLibroPorId(@PathVariable("id") int id) {
         try{
             Libro libro = libroService.verLibrosPorID(id).get();
             return ResponseEntity.status(HttpStatus.OK).body(new LibroModelResponse("Operación exitosa, mostrando libro.", "Status: OK", libro));
