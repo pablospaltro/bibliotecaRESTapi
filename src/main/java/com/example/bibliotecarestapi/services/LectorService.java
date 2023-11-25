@@ -21,6 +21,7 @@ public class LectorService {
     public Optional<Lector> verLectorPorID(int id) {
         return lectorRepository.findById(id);
     }
+    
 
     public Lector guardarLector(Lector nuevoLector) {
         return lectorRepository.save(nuevoLector);

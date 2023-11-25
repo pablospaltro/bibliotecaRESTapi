@@ -6,6 +6,7 @@ import com.example.bibliotecarestapi.modelResponses.BibliotecarioListaModelRespo
 import com.example.bibliotecarestapi.modelResponses.BibliotecarioModelResponse;
 import com.example.bibliotecarestapi.modelResponses.LectorListaModelResponse;
 import com.example.bibliotecarestapi.modelResponses.LectorModelResponse;
+import com.example.bibliotecarestapi.response.ResponseHandler;
 import com.example.bibliotecarestapi.services.BibliotecarioService;
 import com.example.bibliotecarestapi.services.LectorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,14 +38,8 @@ public class RegistroController {
     }
 
     @GetMapping("/bibliotecario/ver/{id}")
-    public ResponseEntity<BibliotecarioModelResponse> verBibliotecarioPorId(@PathVariable("id") int id) {
-        try{
-            Bibliotecario bibliotecario = bibliotecarioService.verBibliotecarioPorID(id).get();
-            return ResponseEntity.status(HttpStatus.OK).body(new BibliotecarioModelResponse("Operación exitosa, mostrando bibliotecario.", "Status: OK", bibliotecario));
-        } catch (Exception e){
-            Bibliotecario bibliotecario = null;
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new BibliotecarioModelResponse("No se encontró el bibliotecario.", "Status: NOT_FOUND", bibliotecario));
-        }
+    public ResponseEntity<Object> verBibliotecarioPorId(@PathVariable("id") int id) {
+        return ResponseHandler.responseBuilder("Aqui estan los datos del bibliotecario solicitado.", HttpStatus.OK, bibliotecarioService.verBibliotecarioPorID(id));
     }
 
 
